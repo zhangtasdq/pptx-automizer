@@ -18,8 +18,14 @@ export default class ModifyColorHelper {
 
       ModifyColorHelper.normalizeColorObject(color);
 
-      const solidFills = element.getElementsByTagName('a:solidFill');
-
+      const allSolidFills = element.getElementsByTagName('a:solidFill');
+      const solidFills = [];
+      for(let i = 0; i < allSolidFills.length; ++i) {
+        const item = allSolidFills[i];
+        if (item.parentElement === element) {
+          solidFills.push(item);
+        }
+      }
       if (!solidFills.length) {
         const solidFill = new XmlElements(element, {
           color: color,
